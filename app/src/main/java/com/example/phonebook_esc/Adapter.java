@@ -56,7 +56,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder>  {
                 builder.setMessage("골라줘!");
                 builder.setNeutralButton("전화걸기", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(DialogInterface dialog, int i) {
                         String number = datalist.get(position).getPhNum();
                         Uri numberU = Uri.parse("tel:"+number);
                         Intent call = new Intent(Intent.ACTION_CALL, numberU);
@@ -65,12 +65,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder>  {
                 });
                 builder.setPositiveButton("문자 보내기", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(DialogInterface dialog, int which) {
                         Uri smsUri = Uri.parse("tel:"+contact.getPhNum());
                         Intent intent = new Intent(Intent.ACTION_VIEW, smsUri);
                         intent.putExtra("address", contact.getPhNum());
                         intent.putExtra("sms_body", "");
-                        intent.setType("emd.android-dir/mms-sms");
+                        intent.setType("vnd.android-dir/mms-sms");
                         context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
                 });
